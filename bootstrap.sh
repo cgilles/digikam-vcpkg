@@ -15,6 +15,8 @@ ORIG_WD="`pwd`"
 INSTALL_PREFIX=/mnt/data/qt.msvc
 VCPKG_VER="2023.10.19"
 
+# Shared with VCPKG toolchain
+
 export MSVC_BASE=${INSTALL_PREFIX}/clang_windows_sdk/msvc
 export MSVC_VER="msvc2019"
 export WINSDK_BASE=${INSTALL_PREFIX}/clang_windows_sdk/winsdk
