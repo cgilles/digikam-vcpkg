@@ -21,7 +21,7 @@ export MSVC_BASE=${INSTALL_PREFIX}/clang_windows_sdk/msvc
 export MSVC_VER="msvc2019"
 export WINSDK_BASE=${INSTALL_PREFIX}/clang_windows_sdk/winsdk
 export WINSDK_VER="10.0.19041.0"
-export CLANG_VER=15
+export CLANG_VER=16
 export LLVM_VER=${CLANG_VER}
 
 if [ ! -d ${INSTALL_PREFIX} ] ; then

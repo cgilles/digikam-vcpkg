@@ -7,6 +7,7 @@ Authors : Gilles Caulier <caulier dot gilles at gmail dot com>
 ---------------
 
 - Linux Debian (tested with Ubuntu 23.04)
+- clang-cl and llvm-link
 
 * Used tools:
 -------------

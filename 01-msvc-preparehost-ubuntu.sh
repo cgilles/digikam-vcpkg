@@ -66,9 +66,9 @@ optional_packages=("cmake"
                    "ca-certificates"
                    "winbind"
                    "clang"
-                   "clang-15"
-                   "clang-tools-15"
-                   "lld"
+                   "clang-16"
+                   "clang-tools-16"
+                   "lld-16"
 )
 
 for pkg in ${optional_packages[@]}; do
@@ -78,7 +78,7 @@ done
 
 # Switch to new compiler
 
-update-alternatives --install /usr/bin/clang-cl clang-cl /usr/bin/clang-cl-15 15
-
+update-alternatives --install /usr/bin/clang-cl clang-cl /usr/bin/clang-cl-16 16
+update-alternatives --install /usr/bin/llvm-link llvm-link /usr/bin/llvm-link-16 16
 
 TerminateScript
