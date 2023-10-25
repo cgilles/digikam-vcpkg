@@ -13,7 +13,6 @@
 
 ORIG_WD="`pwd`"
 INSTALL_PREFIX=/mnt/data/qt.msvc
-VCPKG_VER="2023.10.19"
 
 # Shared with VCPKG toolchain
 
