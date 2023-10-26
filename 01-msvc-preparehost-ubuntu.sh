@@ -78,7 +78,7 @@ done
 
 # Switch to new compiler
 
-update-alternatives --install /usr/bin/clang-cl clang-cl /usr/bin/clang-cl-16 16
-update-alternatives --install /usr/bin/llvm-link llvm-link /usr/bin/llvm-link-16 16
+sudo update-alternatives --install /usr/bin/clang-cl clang-cl /usr/bin/clang-cl-16 16
+sudo update-alternatives --install /usr/bin/llvm-link llvm-link /usr/bin/llvm-link-16 16
 
 TerminateScript
