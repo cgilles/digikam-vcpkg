@@ -14,8 +14,8 @@ set(VCPKG_BUILD_TYPE release)
 
 set(ENV{HOST_ARCH} ${VCPKG_TARGET_ARCHITECTURE})
 
-set(VCPKG_CHAINLOAD_TOOLCHAIN_FILE /mnt/data/qt.msvc/clang_windows_sdk/clang-cl-msvc.cmake)
+set(VCPKG_CHAINLOAD_TOOLCHAIN_FILE @INSTALL_DIR@/clang_windows_sdk/clang-cl-msvc.cmake)
 
-set(ENV{VCPKG_TOOLCHAIN} "/mnt/data/qt.msvc/vcpkg/scripts/toolchains/windows.cmake")
+set(ENV{VCPKG_TOOLCHAIN} "@INSTALL_DIR@/vcpkg/scripts/toolchains/windows.cmake")
 
 set(VCPKG_POLICY_SKIP_ARCHITECTURE_CHECK enabled)

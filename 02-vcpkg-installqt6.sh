@@ -11,30 +11,39 @@
 #
 ################################################################################
 
-ORIG_WD="`pwd`"
-INSTALL_PREFIX=/mnt/data/qt.msvc
+. ./common.sh
+. ./config.sh
+
+#################################################################################################
+# Manage script traces to log file
+
+mkdir -p $INSTALL_DIR/logs
+exec > >(tee $INSTALL_DIR/logs/vcpkg-installqt6.full.log) 2>&1
+
+ChecksRunAsRoot
+StartScript
 
 # Shared with VCPKG toolchain
 
-export MSVC_BASE=${INSTALL_PREFIX}/clang_windows_sdk/msvc
+export MSVC_BASE=${INSTALL_DIR}/clang_windows_sdk/msvc
 export MSVC_VER="msvc2019"
-export WINSDK_BASE=${INSTALL_PREFIX}/clang_windows_sdk/winsdk
+export WINSDK_BASE=${INSTALL_DIR}/clang_windows_sdk/winsdk
 export WINSDK_VER="10.0.19041.0"
 export CLANG_VER=16
 export LLVM_VER=${CLANG_VER}
 
-if [ ! -d ${INSTALL_PREFIX} ] ; then
+if [ ! -d ${INSTALL_DIR} ] ; then
 
-    mkdir -p ${INSTALL_PREFIX}
+    mkdir -p ${INSTALL_DIR}
 
 fi
 
 
-if [ ! -d ${INSTALL_PREFIX}/clang_windows_sdk ] ; then
+if [ ! -d ${INSTALL_DIR}/clang_windows_sdk ] ; then
 
     echo "Installing Clang Windows SDK for Linux..."
 
-    cd ${INSTALL_PREFIX}
+    cd ${INSTALL_DIR}
 
     git clone https://github.com/Nemirtingas/clang-msvc-sdk clang_windows_sdk --depth=1
 
@@ -54,30 +63,33 @@ if [ ! -d ${INSTALL_PREFIX}/clang_windows_sdk ] ; then
 
     rm -rf "${WINSDK_BASE}_tmp"
 
-    sudo ln -s ${INSTALL_PREFIX}/clang_windows_sdk/powershell /usr/bin/
+    sudo ln -s ${INSTALL_DIR}/clang_windows_sdk/powershell /usr/bin/
 
 fi
 
-if [ ! -d ${INSTALL_PREFIX}/vcpkg ] ; then
+if [ ! -d ${INSTALL_DIR}/vcpkg ] ; then
 
     echo "Installing vcpkg..."
 
-    git clone https://github.com/microsoft/vcpkg.git ${INSTALL_PREFIX}/vcpkg
+    git clone https://github.com/microsoft/vcpkg.git ${INSTALL_DIR}/vcpkg
 
-    cp ${ORIG_WD}/x64-windows-clangcl.cmake ${INSTALL_PREFIX}/vcpkg/triplets/community/
+    sed -e "s|@INSTALL_DIR@|${INSTALL_DIR}|g" ${ORIG_WD}/x64-windows-clangcl.cmake.in > ${ORIG_WD}/x64-windows-clangcl.cmake
 
-    sudo ${INSTALL_PREFIX}/vcpkg/bootstrap-vcpkg.sh
+    mv ${ORIG_WD}/x64-windows-clangcl.cmake ${INSTALL_DIR}/vcpkg/triplets/community/
+
+    sudo ${INSTALL_DIR}/vcpkg/bootstrap-vcpkg.sh
 
 else
 
     echo "Updating vcpkg ports..."
-    cd ${INSTALL_PREFIX}/vcpkg
-    git update --rebase
+    cd ${INSTALL_DIR}/vcpkg
+    git pull --rebase
 
 fi
 
 cd ${ORIG_WD}
 
-${INSTALL_PREFIX}/vcpkg/vcpkg install --disable-metrics --triplet=x64-windows-clangcl zlib
-#${INSTALL_PREFIX}/vcpkg/vcpkg install --disable-metrics --triplet=x64-windows-clangcl openssl
-${INSTALL_PREFIX}/vcpkg/vcpkg install --disable-metrics --allow-unsupported --triplet=x64-windows-clangcl qt
+${INSTALL_DIR}/vcpkg/vcpkg install --disable-metrics --triplet=x64-windows-clangcl zlib
+${INSTALL_DIR}/vcpkg/vcpkg install --disable-metrics --allow-unsupported --triplet=x64-windows-clangcl qt
+
+TerminateScript

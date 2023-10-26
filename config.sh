@@ -17,17 +17,17 @@ ORIG_WD="`pwd`"
 
 # Absolute path where are downloaded all tarballs to compile.
 
-DOWNLOAD_DIR="/mnt/data/download.msvc"
+DOWNLOAD_DIR="/mnt/data/download.vcpkg"
 
 # Absolute path where code will be compiled.
 
 #BUILDING_DIR="$ORIG_WD/build.msvc"
-BUILDING_DIR="/mnt/data/build.msvc"
+BUILDING_DIR="/mnt/data/build.vcpkg"
 
 # Absolute path where Qt will be installed.
 
 #INSTALL_DIR="$ORIG_WD/qt6.msvc"
-INSTALL_DIR="/opt/qt6.msvc"
+INSTALL_DIR="/mnt/data/qt6.vcpkg"
 
 ########################################################################
 
