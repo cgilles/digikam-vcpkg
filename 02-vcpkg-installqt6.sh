@@ -90,6 +90,6 @@ fi
 cd ${ORIG_WD}
 
 ${INSTALL_DIR}/vcpkg/vcpkg install --disable-metrics --triplet=x64-windows-clangcl zlib
-${INSTALL_DIR}/vcpkg/vcpkg install --disable-metrics --allow-unsupported --triplet=x64-windows-clangcl qt
+${INSTALL_DIR}/vcpkg/vcpkg install --disable-metrics --allow-unsupported --triplet=x64-windows-clangcl qtbase
 
 TerminateScript
